@@ -8,7 +8,8 @@ namespace MasivRoulette.Services
     public interface IRouletteService
     {
         public Roulette create();
-        public Roulette open(string id);
+        public Roulette get(string id);
+        public Roulette open(Roulette roulette);
         public Roulette bet(string userId, string id, Bet bet);
         public Roulette close(string id);
         public List<Roulette> list();

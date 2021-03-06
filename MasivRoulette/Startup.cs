@@ -30,7 +30,7 @@ namespace MasivRoulette
             services.AddMemoryCache();
             services.AddStackExchangeRedisCache(options => 
             {
-                options.Configuration = "localhost:6379";
+                options.Configuration = Configuration.GetSection("Redis:host").Value + ":" + Configuration.GetSection("Redis:port").Value;
             });
             services.AddScoped<IRouletteRepository,RouletteRepository>();
             services.AddScoped<IRouletteService,RouletteService>();

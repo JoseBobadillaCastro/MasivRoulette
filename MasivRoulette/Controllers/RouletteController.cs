@@ -32,25 +32,50 @@ namespace MasivRoulette.Controllers
         [Route("open/{id}")]
         public IActionResult Open(string id)
         {
-            Roulette roulette = rouletteService.open(id);
-            return Ok(new
+            try
             {
-                status = "OK",
-                message = "Roulette opened",
-                detail = roulette
-            });
+                Roulette roulette = rouletteService.get(id);
+                rouletteService.open(roulette);
+                return Ok(new
+                {
+                    status = "OK",
+                    message = "Roulette opened",
+                    detail = roulette
+                });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new
+                {
+                    status = "NOK",
+                    message = "Invalid request",
+                    detail = ex.Message
+                });
+            }
         }
         [HttpPost]
         [Route("bet/{id}")]
         public IActionResult Bet([FromHeader] string userId,string id,[FromBody] Bet bet)
         {
-            Roulette roulette = rouletteService.bet(userId,id,bet);
-            return Ok(new
+            try 
             {
-                status = "OK",
-                message = "Bet created",
-                detail = roulette
-            });
+                Roulette roulette = rouletteService.bet(userId, id, bet);
+                return Ok(new
+                {
+                    status = "OK",
+                    message = "Bet created",
+                    detail = roulette
+                });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new
+                {
+                    status = "NOK",
+                    message = "Invalid request",
+                    detail = ex.Message
+                });
+            }
         }
         [HttpPut]
         [Route("close/{id}")]
