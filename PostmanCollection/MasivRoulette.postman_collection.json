@@ -1,0 +1,146 @@
+{
+	"info": {
+		"_postman_id": "59188c82-92f3-45cb-a982-79cfc3235072",
+		"name": "MasivRoulette",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create Roulette",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/roulette/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"roulette",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Open Roulette",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/roulette/open/{{rouletteId}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"roulette",
+						"open",
+						"{{rouletteId}}"
+					]
+				},
+				"description": "Roulette ID as input"
+			},
+			"response": []
+		},
+		{
+			"name": "Bet",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "userId",
+						"value": "e3747234-afa3-4241-93f5-9c20a4667489",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"amount\": 320,\r\n    \"selection\": \"4\",\r\n    \"type\": \r\n        {\r\n            \"name\":\"number\"\r\n        }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/roulette/bet/{{rouletteId}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"roulette",
+						"bet",
+						"{{rouletteId}}"
+					]
+				},
+				"description": "Types of bet: number and color"
+			},
+			"response": []
+		},
+		{
+			"name": "Close",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/roulette/close/{{rouletteId}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"roulette",
+						"close",
+						"{{rouletteId}}"
+					]
+				},
+				"description": "Calculates winners earnings"
+			},
+			"response": []
+		},
+		{
+			"name": "List",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/roulette/list",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"roulette",
+						"list"
+					]
+				},
+				"description": "All roulettes"
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "endpoint",
+			"value": ""
+		}
+	]
+}

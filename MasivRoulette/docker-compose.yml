@@ -1,12 +1,11 @@
-version: "2"
+version: "3.4"
 
 services:
   redisdb:
-    container_name: "redisdb"
     image: "redis:latest"
     ports:
-      - "63799:6379"
-    tty: true
+      - "6379:6379"
+
   masivroulette:
     depends_on:
       - "redisdb"

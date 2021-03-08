@@ -28,8 +28,9 @@ namespace MasivRoulette.Services
             roulette = rouletteRepository.get(id);
             return roulette;
         }
-        public Roulette open(Roulette roulette)
+        public Roulette open(string id)
         {
+            Roulette roulette = get(id);
             if (roulette.isOpen == true)
             {
                 throw new Exception("This roulette is already opened");
@@ -82,6 +83,5 @@ namespace MasivRoulette.Services
         {
             return rouletteRepository.list();
         }
-        
     }
 }

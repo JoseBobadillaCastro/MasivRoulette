@@ -14,6 +14,7 @@ using MasivRoulette.Services;
 using MasivRoulette.Repositories;
 using Newtonsoft.Json;
 using StackExchange.Redis;
+using Microsoft.OpenApi.Models;
 namespace MasivRoulette
 {
     public class Startup
@@ -30,18 +31,23 @@ namespace MasivRoulette
             services.AddMemoryCache();
             services.AddStackExchangeRedisCache(options => 
             {
-                options.Configuration = Configuration.GetSection("Redis:host").Value + ":" + Configuration.GetSection("Redis:port").Value;
+                options.Configuration = Configuration.GetValue<string>("Redis:ConnectionString");
             });
             services.AddScoped<IRouletteRepository,RouletteRepository>();
             services.AddScoped<IRouletteService,RouletteService>();
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "MasivRoulette", Version = "V1" });
+            });
         }
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseSwagger();
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "MasivRoulette v1"));
             }
-            app.UseHttpsRedirection();
             app.UseRouting();
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>

@@ -9,7 +9,7 @@ namespace MasivRoulette.Services
     {
         public Roulette create();
         public Roulette get(string id);
-        public Roulette open(Roulette roulette);
+        public Roulette open(string id);
         public Roulette bet(string userId, string id, Bet bet);
         public Roulette close(string id);
         public List<Roulette> list();

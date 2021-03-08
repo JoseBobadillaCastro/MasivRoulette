@@ -46,8 +46,8 @@ namespace MasivRoulette.Repositories
         public List<Roulette> list()
         {
             List<Roulette> roulettes = new List<Roulette>();
-            ConnectionMultiplexer redis = ConnectionMultiplexer.Connect(_iConfiguration.GetSection("Redis:host").Value + ":" + _iConfiguration.GetSection("Redis:port").Value);
-            IServer server = redis.GetServer(_iConfiguration.GetSection("Redis:host").Value, Convert.ToInt32(_iConfiguration.GetSection("Redis:port").Value));
+            ConnectionMultiplexer redis = ConnectionMultiplexer.Connect(_iConfiguration.GetValue<string>("Redis:ConnectionString"));
+            IServer server = redis.GetServer(_iConfiguration.GetValue<string>("Redis:host"), Convert.ToInt32(_iConfiguration.GetValue<string>("Redis:port")));
             var keys = server.Keys();
             foreach (RedisKey k in keys) 
             {

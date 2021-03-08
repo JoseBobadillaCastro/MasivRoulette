@@ -34,8 +34,7 @@ namespace MasivRoulette.Controllers
         {
             try
             {
-                Roulette roulette = rouletteService.get(id);
-                rouletteService.open(roulette);
+                Roulette roulette = rouletteService.open(id);
                 return Ok(new
                 {
                     status = "OK",
@@ -81,13 +80,25 @@ namespace MasivRoulette.Controllers
         [Route("close/{id}")]
         public IActionResult Close(string id)
         {
-            Roulette roulette = rouletteService.close(id);
-            return Ok(new
+            try
             {
-                status = "OK",
-                message = "Roulette closed",
-                detail = roulette
-            });
+                Roulette roulette = rouletteService.close(id);
+                return Ok(new
+                {
+                    status = "OK",
+                    message = "Roulette closed",
+                    detail = roulette
+                });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new
+                {
+                    status = "NOK",
+                    message = "Invalid request",
+                    detail = ex.Message
+                });
+            }
         }
         [HttpGet]
         [Route("list")]
