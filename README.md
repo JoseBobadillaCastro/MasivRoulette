@@ -1,5 +1,4 @@
 # MasivRoulette
-Test 2 for Backend Developer selection
 
 #Deploy
 - Docker: run the following command in project directory:
